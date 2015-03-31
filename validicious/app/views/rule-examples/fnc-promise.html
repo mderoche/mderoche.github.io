@@ -1,0 +1,19 @@
+<div hljs language="js" class="code-big">{
+  rule: 'fnc-promise',
+  args: {
+    fnc: function (context) {
+      var defer = $.Deferred();
+
+
+      $.get('/REST/endpoint').then(function (data) {
+        if (data.available) {
+          defer.resolve(data);
+        } else {
+          defer.reject(data);
+        }
+      });
+
+      return defer;
+    }
+  }
+}</div>

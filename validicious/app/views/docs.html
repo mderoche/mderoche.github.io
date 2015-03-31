@@ -1,0 +1,354 @@
+<div class="container">
+  <nav class="docs-nav" data-spy="affix">
+    <ul>
+      <li><a href="#">Overview</a></li>
+      <li><a href="#">Standard Validations</a></li>
+      <li><a href="#">Quick Validations</a></li>
+      <li><a href="#">Validation Definitions</a></li>
+      <li><a href="#">Summaries</a></li>
+      <li><a href="#">Writing Rules</a></li>
+    </ul>
+  </nav>
+
+  <div class="row">
+    <div class="col-md-12">
+      <h1>Documentation</h1>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <h2>Standard Validations</h2>
+      <p class="text-justify">
+        Validicious ships with two modes:
+        <ul>
+          <li><strong>Asynchronous</strong> with <code>Vds.async(...)</code></li>
+          <li><strong>Synchronous</strong> with <code>Vds.sync(...)</code></li>
+        </ul>
+      </p>
+
+      <h3>Asynchronous with <code>Vds.async(...)</code></h3>
+
+      <p class="text-justify">
+        <div hljs language="js" class="code-big">Vds.async(definition).then(function (summary) {
+});</div>
+      </p>
+
+      <p class="text-justify">
+        <code>Vds.async</code> takes a single parameter:
+        <table class="table table-condensed">
+          <tr>
+            <td><kbd>definition</kbd></td>
+            <td>Array</td>
+            <td>The validation definition (see the <a href="#">Validation Definition</a> section for more information)</td>
+          </tr>
+        </table>
+      </p>
+
+      <p class="text-justify">
+        <code>Vds.async</code> returns a <samp>promise</samp> that resolves once the validation is complete.  The resolving function provides a summary object (see the <a href="#">Summaries</a> section)
+        that describes the results of the validation run.
+      </p>
+
+      <h3>Synchronous with <code>Vds.sync(...)</code></h3>
+
+      <p class="text-justify">
+        <div hljs language="js" class="code-big">var summary = Vds.sync(definition);</div>
+      </p>
+
+      <p class="text-justify">
+        <code>Vds.sync</code> takes a single parameter:
+        <table class="table table-condensed">
+          <tr>
+            <td><kbd>definition</kbd></td>
+            <td>Array</td>
+            <td>The validation definition (see the <a href="#">Validation Definition</a> section for more information)</td>
+          </tr>
+        </table>
+      </p>
+
+      <p class="text-justify">
+        <code>Vds.sync</code> returns a summary object (see the <a href="#">Summaries</a> section) that describes the results of the validation run.
+      </p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <h2>Quick Validations</h2>
+      <p class="text-justify">
+        You can use the two standard validation functions (<samp>async</samp> and <samp>sync</samp>) to do <em>quick validations</em> by using a slightly different argument syntax.  <strong>Quick
+        validations are for running a single rule against a single context</strong> They allow you to do simple validations without the need to use a more complicated and verbose validation definition.
+      </p>
+
+      <p class="text-justify">
+        The following syntax will intiate a quick validation:
+
+        <div hljs language="js" class="code-big">Vds.sync(context, rule, [options]);
+Vds.async(context, rule, [options]);</div>
+
+        <table class="table table-condensed">
+          <tr>
+            <td><kbd>context</kbd></td>
+            <td>Any Datatype</td>
+            <td>Input to validate</td>
+          </tr>
+          <tr>
+            <td><kbd>rule</kbd></td>
+            <td>String</td>
+            <td>Name of the rule to execute</td>
+          </tr>
+          <tr>
+            <td><kbd>options</kbd></td>
+            <td>Object</td>
+            <td>
+              <span class="text-danger">(Optional)</span>
+              Arguments to provide to the rule
+            </td>
+          </tr>
+        </table>
+      </p>
+
+      <h3>Examples</h3>
+      <div hljs language="js" class="code-big">Vds.sync($('#username').val(), 'min-length', { len: 5 });</div>
+      <div hljs language="js" class="code-big">Vds.async($('#password').val(), 'has-alpha');</div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <h2>Validation Definitions</h2>
+
+      <p class="text-justify">
+        At the heart of every validation is the <em>validation definition</em>.  This is an array of <samp>check definitions</samp>, which in turn have arrays of <samp>rule definitions</samp>:
+      </p>
+      <div hljs language="js" class="code-big">[
+  check_definition_1,
+  check_definition_2,
+  check_definition_3,
+  ...
+];</div>
+
+      <h3>Check Definition</h3>
+      <p class="text-justify">
+        A <samp>check definition</samp> is an object that describes a set of rules to execute against a given context.
+      </p>
+
+      <p class="text-justify">
+        <h4>Options</h4>
+        <table class="table table-condensed">
+          <tr>
+            <td><kbd>context</kbd></td>
+            <td>Any Datatype</td>
+            <td>Input to validate.  This can also be a synchronous function that returns the input to be validated.</td>
+          </tr>
+          <tr>
+            <td><kbd>alias</kbd></td>
+            <td>String</td>
+            <td><span class="text-danger">(Optional)</span> An internally-utilized ID to reference this check instance</td>
+          </tr>
+          <tr>
+            <td><kbd>transform</kbd></td>
+            <td>function(<samp>context</samp>)</td>
+            <td>A function that takes the context as the parameter and returns a transformed version before it's sent to the rules</td>
+          </tr>
+          <tr>
+            <td><kbd>ignore</kbd></td>
+            <td>function()</td>
+            <td>If this function returns <samp>true</samp>, then this check will be skipped during validation and will be marked as <span class="text-success">passed</span></td>
+          </tr>
+          <tr>
+            <td><kbd>rules</kbd></td>
+            <td>Array</td>
+            <td>A set of <samp>rule definitions</samp> that describe the rules to run against the given context</td>
+          </tr>
+        </table>
+      </p>
+
+      <div hljs language="js" class="code-big">var check_definition_1 = {
+  context: #('#username').val(),    // context is the value of the #username field
+  alias: 'username',                // give it an alias of 'username'
+  transform: function (context) {   // transform the context to lowercase before it's validated
+    return context.toLowerCase();
+  },
+  ignore: function () {             // ignore this check if the username is 'admin'
+    return (context === 'admin');
+  },
+  rules: [                          // define the rules to run against this context
+    rule_definition_1,
+    rule_definition_2,
+    rule_definition_3,
+    ...
+  ]
+}</div>
+
+      <h3>Rule Definition</h3>
+      <p class="text-justify">
+        A <samp>rule definition</samp> is an object that describes a rule that will be executed against a given context with specified arguments.
+      </p>
+
+      <p class="text-justify">
+        <h4>Options</h4>
+        <table class="table table-condensed">
+          <tr>
+            <td><kbd>rule</kbd></td>
+            <td>String</td>
+            <td>Name of the rule</td>
+          </tr>
+          <tr>
+            <td><kbd>alias</kbd></td>
+            <td>String</td>
+            <td><span class="text-danger">(Optional)</span> An internally-utilized ID to reference this rule instance</td>
+          </tr>
+          <tr>
+            <td><kbd>transform</kbd></td>
+            <td>function(<samp>context</samp>)</td>
+            <td>A function that takes the context as the parameter and returns a transformed version to be used in the actual validation</td>
+          </tr>
+          <tr>
+            <td><kbd>ignore</kbd></td>
+            <td>function()</td>
+            <td>If this function returns <samp>true</samp>, then this rule will be skipped during validation and will be marked as <span class="text-success">passed</span></td>
+          </tr>
+          <tr>
+            <td><kbd>args</kbd></td>
+            <td>Object</td>
+            <td><span class="text-danger">(Optional)</span> Arguments that are consumed by the rule</td>
+          </tr>
+        </table>
+      </p>
+
+      <div hljs language="js" class="code-big">var rule_definition_1 = {
+  rule: 'min-length',               // use the built-in 'min-length' rule
+  alias: 'username_min-length',     // give it an alias of 'username_min-length'
+  transform: function (context) {   // prepend 'user' to the context before it's validated
+    return 'user' + context;
+  },
+  ignore: function () {             // ignore this rule if the username is 'admin'
+    return (context === 'admin');
+  },
+  args: {                           // 'min-length' expects one argument:
+    len: 8                          //  len (integer) - length to check for
+  }
+}</div>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <h2>Summaries</h2>
+      <div>
+        <p class="text-justify">
+          After Validicious has performed a validation, it will return a <em>summary</em>.  A summary is a JavaScript object that contains the validation result,
+          the full validation definition, any payloads, and several methods to easily deal with this information.
+        </p>
+
+        <h4>Summary Properties</h4>
+        <p class="text-justify">
+          <table class="table table-condensed">
+            <tr>
+              <td><kbd>result</kbd></td>
+              <td>Boolean</td>
+              <td>Result of the validation</td>
+            </tr>
+            <tr>
+              <td><kbd>checks</kbd></td>
+              <td>Array</td>
+              <td>All of the checks that were processed during the validation</td>
+            </tr>
+            <tr>
+              <td><kbd>passed</kbd></td>
+              <td>Array</td>
+              <td>All of the checks that passed</td>
+            </tr>
+            <tr>
+              <td><kbd>failed</kbd></td>
+              <td>Array</td>
+              <td>All of the checks that failed</td>
+            </tr>
+          </table>
+        </p>
+
+        <h4>Summary Methods</h4>
+        <p class="text-justify">
+          <table class="table table-condensed">
+            <tr>
+              <td><kbd>.failedChecks()</kbd></td>
+              <td>Returns an array of checks that failed during the validation in an easy to consume format</td>
+            </tr>
+            <tr>
+              <td><kbd>.passededChecks()</kbd></td>
+              <td>Returns an array of checks that passed during the validation in an easy to consume format</td>
+            </tr>
+            <tr>
+              <td><kbd>.failedCheckAliases()</kbd></td>
+              <td>Returns an array of the aliases of the checks that failed</td>
+            </tr>
+            <tr>
+              <td><kbd>.passedCheckAliases()</kbd></td>
+              <td>Returns an array of the aliases of the checks that passed</td>
+            </tr>
+          </table>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <h2>Writing Rules</h2>
+      <div>
+        <p class="text-justify">
+          Writing custom rules in Validicious is easy as can be.  Use this as a template to get you started:
+        </p>
+
+        <div hljs language="js" class="code-big">Vds.Rules.add('rule-name', function (rule, context, options) {
+  return rule.finish(--conditional--, --payload--);
+});</div>
+
+        <p class="text-justify">
+          A rule is essentially just a regular JavaScript function.  It gets three parameters:
+          <table class="table table-condensed">
+            <tr>
+              <td><kbd>rule</kbd></td>
+              <td>A reference to the rule object that is generated internally by Validicious</td>
+            </tr>
+            <tr>
+              <td><kbd>context</kbd></td>
+              <td>The input that is being validated (this can be any data type)</td>
+            </tr>
+            <tr>
+              <td><kbd>options</kbd></td>
+              <td>An object that supplies the arguments chosen to run with this rule</td>
+            </tr>
+          </table>
+        </p>
+
+        <p class="text-justify">
+          To tell Validicious if the input to your rule passed or failed, return <samp>rule.finish(...)</samp>.  To cover both asynchronous and synchronous validations, your rule needs to
+          both call this function <em>and</em> return the result.
+        </p>
+
+        <p class="text-justify">
+          <samp>rule.finish(result, payload)</samp> takes two parameters:
+          <table class="table table-condensed">
+            <tr>
+              <td><kbd>result</kbd></td>
+              <td>A boolean representing the result of the validation</td>
+            </tr>
+            <tr>
+              <td><kbd>payload</kbd></td>
+              <td>Any additional data that should be supplied with the validation result</td>
+            </tr>
+          </table>
+        </p>
+
+        <p class="text-justify">
+          If your rule is <em>only asynchronous</em> and is not applicable to synchronous validation, you do not need to return the result of <samp>rule.finish(...)</samp>.
+        </p>
+      </div>
+    </div>
+  </div>
+
+</div>

@@ -1,0 +1,240 @@
+@import url("http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,400,300,700");
+
+$icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/bootstrap/";
+// bower:scss
+@import "bootstrap-sass-official/assets/stylesheets/_bootstrap.scss";
+// endbower
+
+$primary-main: #367BAD;
+$primary-white: #f8f8f8;
+$primary-gray: #333;
+
+$font-primary: 'Open Sans', Arial, sans-serif;
+
+body {
+  padding: 0;
+  font-family: $font-primary;
+  position: relative;
+}
+
+.header-row {
+  padding-top: 15px;
+  padding-bottom: 50px;
+  background-color: $primary-main;
+  color: $primary-white;
+
+  .title {
+    font-size: 90px;
+    text-align: center;
+  }
+
+  .subtitle {
+    font-size: 15px;
+    text-align: center;
+  }
+}
+
+.topnav {
+  text-align: right;
+  padding-top: 15px;
+
+  li {
+    display: inline;
+  }
+
+  a {
+    display: inline;
+    padding: 15px;
+    color: $primary-white;
+    text-transform: uppercase;
+    font-size: 11px;
+  }
+
+  a:hover {
+    background-color: lighten($primary-main, 10%);
+    text-decoration: none;
+  }
+}
+
+.download {
+  background-color: $primary-main;
+  padding-bottom: 25px;
+  color: $primary-white;
+  text-align: center;
+}
+
+.download-box {
+  padding: 25px;
+  display: inline-block;
+  background-color: lighten($primary-main, 10%);
+}
+
+.download-label {
+  padding-bottom: 20px;
+  text-transform: uppercase;
+}
+
+.download-buttons {
+  text-align: center;
+  display: inline-block;
+
+  .btn {
+    color: $primary-white;
+    border-color: $primary-white;
+    border-radius: 0px;
+  }
+
+  .btn:hover {
+    color: $primary-main;
+    background: $primary-white;
+  }
+
+  .btn:first-child {
+    margin-right: 15px;
+  }
+}
+
+.btn-transparent {
+  background: transparent;
+  border: 2px solid #fff;
+  transition: all .3s ease-in;
+  -webkit-transition: all .3s ease-in;
+  transition-property: background, color;
+  padding: 15px;
+}
+
+.btn-transparent:hover {
+  cursor: pointer;
+}
+
+p {
+  line-height: 150%;
+}
+
+.browserbox {
+  width: 60px;
+  text-align: center;
+  float: left;
+
+  div {
+    padding-top: 2px;
+    font-size: 11px;
+  }
+
+  img {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+.code-big {
+  pre {
+    font-size: 17px !important;
+  }
+}
+
+pre {
+  background: none;
+  border: none;
+  padding: 0px;
+}
+
+.docs-nav {
+  position: fixed;
+  right: 0px;
+  width: 300px;
+  margin-top: 35px;
+
+  ul {
+    list-style-type: none;
+    font-size: 15px;
+  }
+
+  li {
+    padding: 10px;
+
+    a {
+      text-decoration: none;
+      padding: 10px;
+      color: $primary-gray;
+      border-left: 2px solid #fff;
+    }
+
+    a:hover {
+      color: $primary-main;
+      border-left: 2px solid lighten($primary-main, 10%);
+    }
+  }
+
+  li.active {
+    a {
+      font-weight: bold;
+      border-left: 2px solid $primary-main;
+      color: $primary-main;
+    }
+  }
+}
+
+.bottom-spacer {
+  height: 200px;
+}
+
+.rule {
+  padding: 15px;
+
+  .rule-name {
+    font-size: 18px;
+  }
+
+  .rule-expects {
+    float: right;
+  }
+
+  .rule-description {
+    padding: 7px 0px 7px 15px;
+  }
+
+  .rule-specifics {
+    padding-left: 15px;
+  }
+
+  .rule-specifics table td:first-child {
+    width: 1px;
+  }
+
+  .rule-specifics table td:first-child + td {
+    width: 1px;
+  }
+
+  .rule-arguments {
+    padding-left: 15px;
+  }
+
+  .rule-returns {
+    padding-left: 15px;
+  }
+
+  .rule-none {
+    color: #999;
+    font-style: italic;
+  }
+
+  .rule-example {
+    padding-left: 15px;
+  }
+
+  .rule-example-header {
+    margin-left: 15px;
+    background-color: #1d1f21;
+    padding: 5px 15px;
+    color: $primary-white;
+    display: inline-block;
+    font-family: Menlo, Monaco, Consolas, 'Courier New', monospace;
+    position: relative;
+    top: 3px;
+  }
+}
+
+.rule-even {
+  background-color: #f0f0f0;
+}

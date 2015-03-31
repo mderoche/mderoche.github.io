@@ -1,0 +1,56 @@
+<div class="container">
+
+  <div class="row">
+    <div class="col-md-12">
+      <h1>Rules</h1>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="rule" ng-repeat="rule in rules" ng-class-even="'rule-even'">
+        <div class="rule-top">
+          <span class="rule-name"><strong>{{rule.name}}</strong></span>
+          <span class="rule-expects"><strong>Expected Context:</strong> <samp>{{rule.expects}}</samp></span>
+        </div>
+        <div class="rule-description">
+          {{rule.description}}
+        </div>
+        <div class="rule-specifics">
+          <h5>Arguments</h5>
+          <div class="rule-arguments">
+            <div ng-if="rule.args.length == 0" class="rule-none">
+              None
+            </div>
+            <table class="table table-condensed">
+              <tr ng-repeat="arg in rule.args">
+                <td><kbd>{{arg.name}}</kbd></td>
+                <td><samp>{{arg.type}}</samp></td>
+                <td ng-bind-html="arg.description"></td>
+              </tr>
+            </table>
+          </div>
+
+          <h5>Returning Payload</h5>
+          <div class="rule-returns">
+            <span ng-if="rule.payload">
+              {{rule.payload}}
+            </span>
+            <span ng-if="!rule.payload" class="rule-none">
+              None
+            </span>
+          </div>
+
+          <div ng-if="rule.examples">
+            <h5>Examples</h5>
+            <div ng-repeat="example in rule.examples">
+              <div class="rule-example-header">{{example.name}}</div>
+              <div ng-include="example.page" class="rule-example"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

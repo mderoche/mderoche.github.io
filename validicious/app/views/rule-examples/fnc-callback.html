@@ -1,0 +1,13 @@
+<div hljs language="js" class="code-big">{
+  rule: 'fnc-callback',
+  args: {
+    fnc: function (context, callback) {
+      var result = (context === 'hello');
+      var payload = {
+        a: 5
+      }
+
+      callback(result, payload);
+    }
+  }
+}</div>

@@ -1,15 +1,22 @@
+<div class="row top center">
+  <div class="col-md-12">
+    <div class="title">Validicious</div>
+    <div class="subtitle">The <em>deliciously easy</em> JavaScript data validator</div>
+  </div>
+</div>
+
 <div class="download">
   <div class="download-box">
-    <div class="download-label">
-      <i class="fa fa-download"></i> Download
-    </div>
     <div class="download-buttons">
-      <div class="btn btn-blobk btn-transparent">
+      <div class="btn btn-transparent">
         Development <span>(50kb)</span>
       </div>
-      <div class="btn btn-blobk btn-transparent">
+      <div class="btn btn-transparent">
         Production <span>(15kb)</span>
       </div>
+    </div>
+    <div class="download-text">
+      <samp>bower install validicious</samp>
     </div>
   </div>
 </div>
@@ -19,7 +26,12 @@
     <div class="col-md-12">
       <h2><i class="fa fa-check-circle"></i> Validate Something</h2>
       <p class="text-justify">
-        <strong><em>Validicious</em></strong> is a data validator;  give it input&mdash;strings, integers, objects, even functions&mdash;and it'll tell you if it's valid according to some rules you define.  Use pre-built rules like <code>min-length</code>, <code>has-alpha</code>, and <code>credit-card</code>, or just write your own.  After all of the rules have been executed against your input, Validicious will tell you which rules <span class="text-danger">failed</span>, which rules <span class="text-success">passed</span>, and any payloads aggregated from that process.
+        <strong><em>Validicious</em></strong> is a data validator;  give it input&mdash;strings, integers, objects,
+        functions, your diploma&mdash;and it'll tell you if it's <strong>valid</strong> according to some rules you
+        define.  Use pre-built rules like <code>min-length</code>, <code>has-alpha</code>, and <code>credit-card</code>,
+        or write your own.  After all rules have been executed against your input, Validicious will tell you
+        which rules <span class="text-danger"><strong>failed</strong></span>, and which rules
+        <span class="text-success"><strong>passed</strong></span>.
       </p>
     </div>
   </div>
@@ -28,28 +40,29 @@
     <div class="col-md-6">
       <h3><i class="fa fa-wrench"></i> Asynchronously Scrumptious</h3>
       <p class="text-justify">
-        Rules can be <strong>synchronous</strong> <em>or</em> <strong>asynchronous</strong>;  Validicious will take care of the promises and callbacks that nobody ever wants to deal with in asynchronous development.
+        Rules can be <strong>synchronous</strong> <em>or</em> <strong>asynchronous</strong>;  Validicious will take
+        care of the <s>broken</s> promises and callbacks that nobody ever wants to deal with in asynchronous development.
       </p>
     </div>
 
     <div class="col-md-6">
       <h3><i class="fa fa-globe"></i> Browser Support</h3> 
       <p class="text-justify">
-        <div class="browserbox">
+        <div class="browser">
           <img src="images/chrome_64x64.png" />
           <div>
             Latest
           </div>
         </div>
 
-        <div class="browserbox">
+        <div class="browser">
           <img src="images/firefox_64x64.png" />
           <div>
             Latest
           </div>
         </div>
 
-        <div class="browserbox">
+        <div class="browser">
           <img src="images/internet-explorer_64x64.png" />
           <div>
             10+
@@ -61,7 +74,7 @@
 
   <div class="row">
     <div class="col-md-12">
-      <h2><i class="fa fa-code"></i> Code Glances</h2>
+      <h2><i class="fa fa-code"></i> Quick Glances</h2>
       <div class="row">
         <div class="col-md-6">
           <h3>Asynchronous</h3>
@@ -103,23 +116,12 @@ console.log(validate);</div>
 
       <div class="row">
         <div class="col-md-12">
-          <h3>Custom Asynchronous Rule</h3>
-          <div hljs language="js" class="code-big">// uses a REST endpoint to see if the username is available
-// if it isn't, it will return the existing profile as payload
+          <h3>Custom Rule</h3>
+          <div hljs language="js" class="code-big">
 Vds.Rules.add('username-available', function (rule, context, options) {
   $.get('/rest/usernames/' + context, function (data) {
     rule.finish((data.username !== ''), data);
   });
-});</div>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col-md-12">
-          <h3>Custom Synchronous Rule</h3>
-          <div hljs language="js" class="code-big">// takes a user object as input, ensures that the `email` property ends with the company domain
-Vds.Rules.add('company-email', function (rule, context, options) {
-  return rule.finish(context.email.indexOf('@company.com' !== -1));
 });</div>
         </div>
       </div>

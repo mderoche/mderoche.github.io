@@ -11,7 +11,8 @@
 angular
   .module('validiciousSiteApp', [
     'ngRoute',
-    'hljs'
+    'hljs',
+    'duScroll'
   ])
   .config(function ($routeProvider, hljsServiceProvider) {
     $routeProvider

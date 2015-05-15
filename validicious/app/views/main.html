@@ -1,7 +1,11 @@
-<div class="row top center">
-  <div class="col-md-12">
-    <div class="title">Validicious</div>
-    <div class="subtitle">The <em>deliciously easy</em> JavaScript data validator</div>
+<div class="top center">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="title">Validicious</div>
+        <div class="subtitle">The <em>deliciously easy</em> JavaScript data validator</div>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -46,7 +50,7 @@
     </div>
 
     <div class="col-md-6">
-      <h3><i class="fa fa-globe"></i> Browser Support</h3> 
+      <h3><i class="fa fa-globe"></i> Browser Support</h3>
       <p class="text-justify">
         <div class="browser">
           <img src="images/chrome_64x64.png" />
@@ -78,7 +82,7 @@
       <div class="row">
         <div class="col-md-6">
           <h3>Asynchronous</h3>
-          <div hljs language="js" class="code-big">Vds.async([
+          <div hljs language="js">Vds.async([
   {
     context: $('#password'),
     alias:   'password',
@@ -96,7 +100,7 @@
 
         <div class="col-md-6">
           <h3>Synchronous</h3>
-          <div hljs language="js" class="code-big">var validate = Vds.sync([
+          <div hljs language="js">var validate = Vds.sync([
   {
     context: $('#password'),
     alias:   'password',
@@ -117,7 +121,7 @@ console.log(validate);</div>
       <div class="row">
         <div class="col-md-12">
           <h3>Custom Rule</h3>
-          <div hljs language="js" class="code-big">
+          <div hljs language="js">
 Vds.Rules.add('username-available', function (rule, context, options) {
   $.get('/rest/usernames/' + context, function (data) {
     rule.finish((data.username !== ''), data);
@@ -129,7 +133,7 @@ Vds.Rules.add('username-available', function (rule, context, options) {
       <div class="row">
         <div class="col-md-12">
           <h3>Quick Validation</h3>
-          <div hljs language="js" class="code-big">Vds.sync($('#cost').val(), 'currency', { allowDecimal: true });</div>
+          <div hljs language="js">Vds.sync($('#cost').val(), 'currency', { allowDecimal: true });</div>
         </div>
       </div>
     </div>

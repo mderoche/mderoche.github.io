@@ -1,13 +1,28 @@
-<div class="row top small">
-  <div class="col-md-12">
-    <div class="title">Rules</div>
-    <div class="subtitle">Complete listing of all pre-built rules that ship with Validicious by default.</div>
+<div class="top small">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="title">Rules</div>
+        <div class="subtitle">Complete listing of all pre-built rules that ship with Validicious</div>
+      </div>
+    </div>
   </div>
 </div>
 
-<div class="container">
+<div class="container page-rules">
   <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-3">
+      <div class="list-group rules-categories">
+        <div class="list-group-item active"><strong>Categories</strong></div>
+        <a href="#" class="list-group-item">Strings</a>
+        <a href="#" class="list-group-item">Patterns</a>
+        <a href="#" class="list-group-item">Numerics</a>
+        <a href="#" class="list-group-item">Dates and Times</a>
+        <a href="#" class="list-group-item">JS Variables</a>
+        <a href="#" class="list-group-item">Generics</a>
+      </div>
+    </div>
+    <div class="col-md-9">
       <div class="rule" ng-repeat="rule in rules" ng-class-even="'rule-even'">
         <div class="rule-top">
           <span class="rule-name"><strong>{{rule.name}}</strong></span>
